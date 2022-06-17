@@ -1,3 +1,36 @@
+---
+Instructions to build rAudio on Cubieboard2
+
+1. Follow [Installation guide on ArchLinuxARM.org](https://archlinuxarm.org/platforms/armv7/allwinner/cubieboard-2)
+2. Insert SD Card into cubieboard2, power on and login by ssh, user alarm:alarm and root:root
+3. Set your mirror by edit /etc/pacman.d/mirrorlist
+4. echo noarp >> /etc/dhcpcd.conf
+5. echo DNSSEC=no >> /etc/systemd/resolved.conf
+6. rm -r /etc/systemd/system/network-online.target.wants
+7. systemctl start systemd-random-seed
+8. echo  kid3-common samba snapcast camilladsp camillagui-backend chromium matchbox-window-manager plymouth-lite-rbp upower xf86-video-fbturbo  spotifyd upmpdcli > /boot/features 
+9. Create file /boot/versions and add following contents:
+```text
+version=1
+release=20220610 # check the release you want
+```
+10. create two dummy files `/boot/config.txt0` and `/boot/cmdline.txt0`, many rAudio scripts will grep it
+11. UTF-8 support on the target:
+
+* enable en_US.UTF-8 in /etc/locale.gen
+* run `locale-gen`
+* `sudo localectl set-locale en_US.UTF-8`
+
+12. on the target download and run create-ros.sh as root, please aware the password for root is changed to **ros** now
+13. set the timezone by `timedatectl -set-timezone Asia/Shanghai`
+14. change taskset from 3 to 0 in /etc/systemd/system/mpd.service.d/override.conf otherwise will get a tastset error when checking `systemctl status mpd.service`
+14. check how the system starting up by `journalctl -e --no-hostname` and fix issues as they come
+15. logout ssh and input cubieboard2's IP address in browser to configure and control rAudio
+15. create images, follow original instructions below
+
+Credit: many thanks to @fillods on post [rAudio-1 running on BeagleBone Black](https://github.com/rern/rAudio-1/discussions/299) and @rern creates so great music player [rAudio-1](https://github.com/rern/rAudio-1/)
+
+---
 rOS - DIY rAudio
 ---
 Build [**rAudio**](https://github.com/rern/rAudio-1) - Audio player and renderer for Raspberry Pi

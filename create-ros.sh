@@ -5,7 +5,6 @@ trap exit INT
 SECONDS=0
 
 . /boot/versions
-[[ $mirror != 0 ]] && sed -i '/^Server/ s|//.*mirror|//'$mirror'.mirror|' /etc/pacman.d/mirrorlist
 features=$( cat /boot/features )
 
 banner() {
@@ -18,9 +17,6 @@ banner() {
 }
 #----------------------------------------------------------------------------
 banner 'Initialize Arch Linux Arm ...'
-
-pacman-key --init
-pacman-key --populate archlinuxarm
 
 rm -f /var/lib/pacman/db.lck  # in case of rerun
 
@@ -44,12 +40,8 @@ banner 'Upgrade system and default packages ...'
 
 packages='alsaequal alsa-utils audio_spectrum_oled cava cronie cd-discid dosfstools evtest gifsicle hdparm hfsprogs 
 i2c-tools imagemagick inetutils jq mpc mpd nfs-utils nginx-mainline-pushstream nss-mdns 
-parted php-fpm sshpass python-rpi-gpio python-rplcd python-smbus2 raspberrypi-stop-initramfs sudo udevil wget wiringpi'
+parted php-fpm sshpass python-rplcd python-smbus2 sudo udevil wget wiringpi'
 
-if [[ -e /boot/kernel8.img ]]; then
-	pacman -R --noconfirm linux-aarch64 uboot-raspberrypi
-	packages+=' linux-rpi raspberrypi-firmware'
-fi
 
 # add +R repo
 if ! grep -q '^\[+R\]' /etc/pacman.conf; then

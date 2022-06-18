@@ -1,5 +1,6 @@
 ---
 Instructions to build rAudio on Cubieboard2
+---
 
 1. Follow [Installation guide on ArchLinuxARM.org](https://archlinuxarm.org/platforms/armv7/allwinner/cubieboard-2)
 2. Insert SD Card into cubieboard2, power on and login by ssh, user alarm:alarm and root:root

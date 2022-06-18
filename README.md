@@ -3,13 +3,14 @@ Instructions to build rAudio on Cubieboard2
 
 1. Follow [Installation guide on ArchLinuxARM.org](https://archlinuxarm.org/platforms/armv7/allwinner/cubieboard-2)
 2. Insert SD Card into cubieboard2, power on and login by ssh, user alarm:alarm and root:root
-3. Set your mirror by edit /etc/pacman.d/mirrorlist
+3. Set your mirror by edit /etc/pacman.d/mirrorlist and add server `https://mirrors.bfsu.edu.cn/archlinuxarm/$arch/$repo`
 4. echo noarp >> /etc/dhcpcd.conf
 5. echo DNSSEC=no >> /etc/systemd/resolved.conf
 6. rm -r /etc/systemd/system/network-online.target.wants
 7. systemctl start systemd-random-seed
 8. echo  kid3-common samba snapcast camilladsp camillagui-backend chromium matchbox-window-manager plymouth-lite-rbp upower xf86-video-fbturbo  spotifyd upmpdcli > /boot/features 
 9. Create file /boot/versions and add following contents:
+
 ```text
 version=1
 release=20220610 # check the release you want

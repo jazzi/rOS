@@ -24,7 +24,7 @@ release=20220610 # check the release you want
 * `sudo localectl set-locale en_US.UTF-8`
 
 12. on the target download and run create-ros.sh as root, please aware the password for root is changed to **ros** now
-13. set the timezone by `timedatectl -set-timezone Asia/Shanghai`
+13. set the timezone by `timedatectl set-timezone Asia/Shanghai`
 14. change taskset from 3 to 0 in /etc/systemd/system/mpd.service.d/override.conf otherwise will get a tastset error when checking `systemctl status mpd.service`
 14. check how the system starting up by `journalctl -e --no-hostname` and fix issues as they come
 15. logout ssh and input cubieboard2's IP address in browser to configure and control rAudio
